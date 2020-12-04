@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { TodoHeader, TodoInput,Like } from './components'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  // state = {
+  //   say: 'hello china'
+  // }
+  constructor() {
+    super()
+    this.state = {
+      say: 'hello china',
+      title: '我是head',
+      goodsList: [
+        {
+          id: '1',
+          name: 'xiaoming'
+        },
+        {
+          id: '2',
+          name: 'duoduo'
+        }
+      ]
+    }
+  }
+
+  addOne = (value)=>{
+    console.log(value)
+    this.setState({
+      goodsList:this.state.goodsList.concat(
+        {
+          id:"3",
+          name:value
+        }
+      )
+    })
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <TodoHeader title={this.state.title} x={1} y={3}>
+          {/* {this.state.say} */}
+
+        </TodoHeader>
+        <TodoInput addOne = {this.addOne}/>
+        {this.state.goodsList.map((item, index) => {
+          return <div key={index}>{item.name}</div>
+        })}
+        <Like />
+      </Fragment>
+    )
+  }
 }
-
-export default App;
